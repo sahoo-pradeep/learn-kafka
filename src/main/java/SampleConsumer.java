@@ -24,7 +24,7 @@ public class SampleConsumer {
     properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
     //The consumer group id used to identify to which group this consumer belongs
-    properties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
+    properties.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
 
     //The class that will be used to serialize the key object
     properties

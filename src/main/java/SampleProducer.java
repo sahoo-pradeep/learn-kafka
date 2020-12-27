@@ -1,7 +1,10 @@
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public class SampleProducer {
@@ -31,8 +34,17 @@ public class SampleProducer {
   }
 
   public static void sendProduct(String key, String value) {
+    System.out.println("Sending message: [key = " + key + ", value = " + value + "]");
     ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_PRODUCTS, key, value);
-    kafkaProducer.send(record);
+    Future<RecordMetadata> futureRecord = kafkaProducer.send(record);
+
+    try {
+      RecordMetadata recordMetadata = futureRecord.get();
+      System.out.println("Message sent successfully: " + recordMetadata);
+    } catch (InterruptedException | ExecutionException e) {
+      e.printStackTrace();
+    }
+
     kafkaProducer.close();
   }
 }

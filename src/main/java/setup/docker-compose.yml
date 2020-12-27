@@ -3,7 +3,7 @@ version: '3'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
-    container_name: zk1
+    container_name: zk
     ports:
       - 2181:2181 #zookeeper client port
 
@@ -14,4 +14,4 @@ services:
       - 9092:9092
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
-      KAFKA_ZOOKEEPER_CONNECT: zk1:2181
+      KAFKA_ZOOKEEPER_CONNECT: zk:2181

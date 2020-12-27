@@ -11,10 +11,10 @@ docker exec -it kafka /bin/sh
 cd /opt/kafka/bin
 
 -- create topic
- ./kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 2 --topic products
+ ./kafka-topics.sh --create --zookeeper zk:2181 --replication-factor 1 --partitions 2 --topic products
 
 -- list topics
-./kafka-topics.sh --list --zookeeper zookeeper:2181
+./kafka-topics.sh --list --zookeeper zk:2181
 
 -- create consumer
 ./kafka-console-consumer.sh --topic products --bootstrap-server localhost:9092  --from-beginning
