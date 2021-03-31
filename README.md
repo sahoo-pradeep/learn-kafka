@@ -1,1 +1,25 @@
 # learn-kafka
+
+-- Start docker-compose
+docker-compose -f docker-compose.yml up -d
+
+-- Stop docker-compose
+docker-compose -f docker-compose.yml down
+
+-- Open kafka container terminal
+docker exec -it kafka /bin/sh
+
+-- kafka scripts
+cd /opt/kafka/bin
+
+-- create topic
+ ./kafka-topics.sh --create --zookeeper zk:2181 --replication-factor 1 --partitions 2 --topic products
+
+-- list topics
+./kafka-topics.sh --list --zookeeper zk:2181
+
+-- create consumer
+./kafka-console-consumer.sh --topic products --bootstrap-server localhost:9092  --from-beginning
+
+-- produce message
+./kafka-console-producer.sh --topic products --bootstrap-server localhost:9092
